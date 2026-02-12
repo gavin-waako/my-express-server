@@ -3,13 +3,20 @@ const router = express.Router();
 
 // Static routes
 
-
 router.get("/new", (req, res) => {
-  res.send("New users form.");
+  res.render("users/new", { firstName: "Test" });
 });
 
 router.post("/", (req, res) => {
-  res.send("Create user.");
+  const isValid = true;
+  if (isValid) {
+    users.push({ name: req.body.firstName });
+    res.redirect(`/users/${users.length - 1}`);
+  } else {
+    console.log("Error :");
+    res.render("users/new", { firstName: req.body.firstName });
+  }
+  res.send("Hi, " + req.body.firstName);
 });
 
 // Dynamic Routes
